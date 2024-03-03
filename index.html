@@ -9,30 +9,34 @@
     <title>CFG Planner</title>
 </head>
 <body>
-    <div id="mainContainer">
-        <div class="container">
-            <div class="statementContainer">
-                <!-- left side -->
-                <span>...</span>
+    <div class="container">
+        <div class="statementContainer">
+            <!-- left side -->
+            <input type="text" value="...">
 
-                <!-- right side -->
-                <div class="rigthSide">
-                    <div class="ruleContainer">
-                        <p>-></p>
-                        <span>...</span>
+            <!-- right side -->
+            <div class="rigthSide">
+                <div class="ruleContainer">
+                    <p>-></p>
+                    <input type="text" value="...">
+                </div>
+                <div class="ruleContainer">
+                    <div class="addRemoveRule">
+                        <button>+</button>
+                        <button>-</button>
                     </div>
-                    <div class="ruleContainer">
-                        <p>|&nbsp;&nbsp;&nbsp;</p>
-                        <span>...</span>
-                    </div>
+                    <p>|&nbsp;&nbsp;&nbsp;</p>
+                    <input type="text" value="...">
                 </div>
             </div>
+        </div>
 
-            <div class="addRemove">
-                <button>+</button>
-                <button>-</button>
-            </div>
+        <div class="addRemoveStatement">
+            <button>+</button>
+            <button>-</button>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

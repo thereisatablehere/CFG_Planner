@@ -4,15 +4,14 @@
     --ruleHorizontalSpacing: 0.25em;
 }
 
-body, span, button {
+body, input, button {
     background-color: #1b2631;
     color: #d1c4e9;
     font-family: "Madimi One", sans-serif;
     font-size: 30px;
 }
 
-span {
-    -webkit-user-modify: read-write-plaintext-only;
+input {
     border: none;
     outline: none;
     width: 12em;
@@ -20,8 +19,8 @@ span {
     text-align: end;
     margin: 0;
     text-align: start;
-    /* background-color: orchid; */
     padding: 7px;
+    /* background-color: orchid; */
 }
 
 .container {
@@ -38,7 +37,7 @@ span {
     margin-bottom: 0.5em;
 }
 
-.statementContainer span:first-child {
+.statementContainer input:first-child {
     text-align: end;
 }
 
@@ -50,7 +49,7 @@ span {
 .ruleContainer {
     display: flex;
     flex-direction: row;
-    align-items: center ;
+    align-items: center;
     margin-left: var(--ruleHorizontalSpacing);
 }
 .ruleContainer p {
@@ -58,26 +57,17 @@ span {
     margin-right: var(--ruleHorizontalSpacing);
 }
 
-.addRemove {
+.addRemoveRule {
+    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-.removeRule {
-    position: absolute;
-    width: 1em;
-    height: 1em;
-    margin-left: -1.25em;
-    /* filter: invert(100%); */
-    /* background-color: blue; */
-}
-.removeRule:hover {
-    filter: hue-rotate(-5deg);
-    cursor: pointer;
+    margin-top: 0.15em;
+    margin-left: -2.5em;
 }
 
 button {
+    font-size: 20px;
     border: none;
     background-color: #3949AB;
     border-radius: 5px;
@@ -90,8 +80,17 @@ button:hover {
     cursor: pointer;
 }
 
-#credits {
-    position: absolute;
+.addRemoveStatement {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.addRemoveStatement button {
+    font-size: 25px;
+    color: white;
+    background-color: #1E88E5;
+}
+.addRemoveStatement button:hover {
+    background-color: #42A5F5;
 }
