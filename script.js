@@ -139,7 +139,7 @@ function addStatement(elem) {
     
     let removeButton = document.createElement("button");
     removeButton.innerText = "-";
-    // removeButton.addEventListener("click", function(){removeRule(removeButton)});
+    removeButton.addEventListener("click", function(){removeStatement(removeButton)});
 
     addRemoveStatement.appendChild(addButton);
     addRemoveStatement.appendChild(removeButton);
@@ -147,4 +147,13 @@ function addStatement(elem) {
     newStatement.appendChild(addRemoveStatement);
 
     statement.insertAdjacentElement("afterend", newStatement);
+}
+
+function removeStatement(elem) {
+    let statementCount = document.body.children.length;
+    if(statementCount > 2) {
+        let statement = elem.parentNode.parentNode;
+
+        statement.remove();
+    }
 }
