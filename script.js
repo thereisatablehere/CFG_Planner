@@ -176,3 +176,144 @@ function toggleButtons() {
         }
     }
 }
+
+let loadData;
+function load(input) {
+    let fileReader = new FileReader();
+    fileReader.readAsText(input.files[0]);
+
+    fileReader.onload = function() {
+        let result = fileReader.result;
+        loadData = JSON.parse(result);
+        input.value = "";
+        console.log("load test?")
+
+        createHTMLfromLoadData();
+    }
+}
+
+function createHTMLfromLoadData() {
+    let statementCount = loadData.statements.length;
+
+    // first clear existing html
+    if(statementCount > 0) {
+        console.log("clearing")
+        let remove = true;
+        while(remove) {
+            let container = document.body.children[1];
+            if(container.className == "container") {
+                container.remove();
+            }
+            else {
+                remove = false;
+            }
+        }
+    }
+
+    // then add statements
+    for(let i = 0; i < statementCount; i++) {
+        let newStatement = document.createElement("div");
+        newStatement.className = "container";
+
+        let statementContainer = document.createElement("div");
+        statementContainer.className = "statementContainer";
+
+        let firstInput = document.createElement("input");
+        firstInput.type = "text";
+        firstInput.value = loadData.statements[i].name;
+
+        statementContainer.appendChild(firstInput);
+
+        let rightSide = document.createElement("div");
+        rightSide.className = "rightSide";
+
+        let ruleContainerTop = document.createElement("div");
+        ruleContainerTop.className = "ruleContainer";
+
+        let arrow = document.createElement("p");
+        arrow.innerHTML = "->";
+
+        let input = document.createElement("input");
+        input.type = "text";
+        input.value = loadData.statements[i].rules[0];
+
+        ruleContainerTop.appendChild(arrow);
+        ruleContainerTop.appendChild(input);
+
+        rightSide.appendChild(ruleContainerTop);
+
+        if(loadData.statements[i].rules.length == 1) {
+            let ruleContainerBottom = document.createElement("div");
+            ruleContainerBottom.className = "ruleContainer";
+
+            let firstAddRemoveRule = document.createElement("div");
+            firstAddRemoveRule.className = "firstAddRemoveRule";
+
+            let firstAddButton = document.createElement("button");
+            firstAddButton.innerText = "+";
+            firstAddButton.addEventListener("click", function(){addFirstRule(firstAddButton)});
+
+            firstAddRemoveRule.appendChild(firstAddButton);
+
+            ruleContainerBottom.appendChild(firstAddRemoveRule);
+
+            rightSide.appendChild(ruleContainerBottom);
+        }
+        else {
+            for(let ruleIndex = 1; ruleIndex < loadData.statements[i].rules.length; ruleIndex++) {
+                let ruleContainer = document.createElement("div");
+                ruleContainer.className = "ruleContainer";
+
+                let pipe = document.createElement("p");
+                pipe.innerHTML = "|&nbsp;&nbsp;&nbsp;";
+                
+                let input = document.createElement("input");
+                input.type = "text";
+                input.value = loadData.statements[i].rules[ruleIndex];
+                
+                let addRemoveRule = document.createElement("div");
+                addRemoveRule.className = "addRemoveRule";
+                
+                let addButton = document.createElement("button");
+                addButton.innerText = "+";
+                addButton.addEventListener("click", function(){addRule(addButton)});
+                
+                let removeButton = document.createElement("button");
+                removeButton.innerText = "-";
+                removeButton.addEventListener("click", function(){removeRule(removeButton)});
+
+                addRemoveRule.appendChild(addButton);
+                addRemoveRule.appendChild(removeButton);
+                
+                ruleContainer.appendChild(addRemoveRule);
+                ruleContainer.appendChild(pipe);
+                ruleContainer.appendChild(input);
+
+                rightSide.appendChild(ruleContainer);
+            }
+        }
+
+        statementContainer.appendChild(rightSide);
+
+        newStatement.appendChild(statementContainer);
+        
+        let addRemoveStatement = document.createElement("div");
+        addRemoveStatement.className = "addRemoveStatement";
+
+        let addButton = document.createElement("button");
+        addButton.innerText = "+";
+        addButton.addEventListener("click", function(){addStatement(addButton)});
+        
+        let removeButton = document.createElement("button");
+        removeButton.innerText = "-";
+        removeButton.addEventListener("click", function(){removeStatement(removeButton)});
+
+        addRemoveStatement.appendChild(addButton);
+        addRemoveStatement.appendChild(removeButton);
+
+        newStatement.appendChild(addRemoveStatement);
+
+        let insertAfterElem = document.getElementById("mainControls");
+        insertAfterElem.insertAdjacentElement("afterend", newStatement);
+    }
+}

@@ -23,7 +23,7 @@ input {
     /* background-color: orchid; */
 }
 
-button {
+button, label {
     font-size: 20px;
     border: none;
     background-color: #3949AB;
@@ -31,7 +31,7 @@ button {
     margin-left: 5px;
     margin-right: 5px;
 }
-button:hover {
+button:hover, label:hover {
     background-color: #5C6BC0;
     font-weight: bold;
     cursor: pointer;
@@ -44,12 +44,21 @@ button:hover {
     margin-bottom: 0.5em;
 }
 
-#mainControls button {
+#mainControls button, #mainControls label {
     background-color: #00ACC1;
     color: white;
 }
-#mainControls button:hover {
+#mainControls button:hover, #mainControls label:hover {
     background-color: #26C6DA;
+}
+
+#mainControls label {
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+#mainControls input {
+    display: none;
 }
 
 .container {
