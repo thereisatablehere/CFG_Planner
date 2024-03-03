@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Madimi+One&display=swap");
+
+:root {
+    --ruleHorizontalSpacing: 0.25em;
+}
+
+body, span, button {
+    background-color: #1b2631;
+    color: #d1c4e9;
+    font-family: "Madimi One", sans-serif;
+    font-size: 30px;
+}
+
+span {
+    -webkit-user-modify: read-write-plaintext-only;
+    border: none;
+    outline: none;
+    width: 12em;
+    height: 1em;
+    text-align: end;
+    margin: 0;
+    text-align: start;
+    /* background-color: orchid; */
+    padding: 7px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+}
+
+.statementContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 0.5em;
+}
+
+.statementContainer span:first-child {
+    text-align: end;
+}
+
+.statementContainer .rightSide {
+    display: flex;
+    flex-direction: column;
+}
+
+.ruleContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center ;
+    margin-left: var(--ruleHorizontalSpacing);
+}
+.ruleContainer p {
+    margin: 0;
+    margin-right: var(--ruleHorizontalSpacing);
+}
+
+.addRemove {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.removeRule {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    margin-left: -1.25em;
+    /* filter: invert(100%); */
+    /* background-color: blue; */
+}
+.removeRule:hover {
+    filter: hue-rotate(-5deg);
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    background-color: #3949AB;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+button:hover {
+    background-color: #5C6BC0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#credits {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
