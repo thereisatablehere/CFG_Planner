@@ -9,7 +9,7 @@ function addRule(elem) {
     
     let input = document.createElement("input");
     input.type = "text";
-    input.value = "...HERE";
+    input.value = ".";
     
     let addRemoveRule = document.createElement("div");
     addRemoveRule.className = "addRemoveRule";
@@ -32,6 +32,16 @@ function addRule(elem) {
     container.insertAdjacentElement("afterend", ruleContainer);
 }
 
+function addFirstRule(elem) {
+    let container = elem.parentNode.parentNode;
+
+    addRule(elem);
+
+    container.remove();
+}
+
 function removeRule(elem) {
-    console.log("remove");
+    let container = elem.parentNode.parentNode;
+    
+    container.remove();
 }
