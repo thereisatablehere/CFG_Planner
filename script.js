@@ -58,7 +58,6 @@ function removeRule(elem) {
     container.remove();
 
     if(containerIndex == 1 && parentChildsLength == 2) {
-        console.log("do it")
         let ruleContainer = document.createElement("div");
         ruleContainer.className = "ruleContainer";
 
@@ -186,7 +185,6 @@ function load(input) {
         let result = fileReader.result;
         loadData = JSON.parse(result);
         input.value = "";
-        console.log("load test?")
 
         createHTMLfromLoadData();
     }
@@ -197,7 +195,6 @@ function createHTMLfromLoadData() {
 
     // first clear existing html
     if(statementCount > 0) {
-        console.log("clearing")
         let remove = true;
         while(remove) {
             let container = document.body.children[1];
@@ -319,7 +316,41 @@ function createHTMLfromLoadData() {
 }
 
 function save() {
-    document.getElementById("downloadLink").style.visibility = "visible";
+    let saveData = {"statements":[]};
+
+    let statements = document.getElementsByClassName("container");
+    for(let i = 0; i < statements.length; i++) {
+        let statement = {
+            "name": (statements[i].children[0].children[0].value).toString(), 
+            "rules": []
+        };
+
+        let rules = statements[i].children[0].children[1].children;
+        
+        let rule = rules[0].children[1].value;
+        statement.rules.push(rule);
+
+        for(let j = 1; j < rules.length; j++) {
+            // if there is only one rule, the add rule button will be below
+            if(rules[j].children.length > 1) {
+                rule = rules[j].children[2].value;
+    
+                statement.rules.push(rule);
+            }
+        }
+
+        saveData.statements.push(statement);
+    }
+    
+    let dataStringify = JSON.stringify(saveData);
+    let file = new Blob([dataStringify], {type: "application/json"});
+    let url = URL.createObjectURL(file);
+    
+    let aRef = document.getElementById("downloadLink")
+    aRef.href = url;
+    aRef.download = "CFG.json";
+
+    aRef.style.visibility = "visible";
 }
 
 function downloadFile() {
