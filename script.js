@@ -157,3 +157,22 @@ function removeStatement(elem) {
         statement.remove();
     }
 }
+
+let showButtons = true;
+function toggleButtons() {
+    showButtons = !(showButtons);
+
+    let buttons = document.getElementsByTagName("button");
+    for(let button of buttons) {
+        if(button.className != "mainControlButton") {
+            if(showButtons) {
+                button.style.visibility = "visible";
+                // button.style.display = "block";
+            }
+            else {
+                button.style.visibility = "hidden";
+                // button.style.display = "none";
+            }
+        }
+    }
+}

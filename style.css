@@ -23,10 +23,38 @@ input {
     /* background-color: orchid; */
 }
 
+button {
+    font-size: 20px;
+    border: none;
+    background-color: #3949AB;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+button:hover {
+    background-color: #5C6BC0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#mainControls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 0.5em;
+}
+
+#mainControls button {
+    background-color: #00ACC1;
+    color: white;
+}
+#mainControls button:hover {
+    background-color: #26C6DA;
+}
+
 .container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.5em;
 }
 
 .statementContainer {
@@ -68,20 +96,6 @@ input {
 
 .firstAddRemoveRule {
     margin: 0;
-}
-
-button {
-    font-size: 20px;
-    border: none;
-    background-color: #3949AB;
-    border-radius: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-button:hover {
-    background-color: #5C6BC0;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 .addRemoveStatement {
