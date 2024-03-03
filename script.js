@@ -42,6 +42,37 @@ function addFirstRule(elem) {
 
 function removeRule(elem) {
     let container = elem.parentNode.parentNode;
-    
+
+    let parent = container.parentNode;
+    let parentChilds = parent.children;
+    let parentChildsLength = parentChilds.length;
+
+    let containerIndex = -1;
+    for(let i = 0; i < parentChilds.length; i++) {
+        if(parentChilds[i] == container) {
+            containerIndex = i;
+            break;
+        }
+    }
+
     container.remove();
+
+    if(containerIndex == 1 && parentChildsLength == 2) {
+        console.log("do it")
+        let ruleContainer = document.createElement("div");
+        ruleContainer.className = "ruleContainer";
+
+        let firstAddRemoveRule = document.createElement("div");
+        firstAddRemoveRule.className = "firstAddRemoveRule";
+
+        let firstAddButton = document.createElement("button");
+        firstAddButton.innerText = "+";
+        firstAddButton.addEventListener("click", function(){addFirstRule(firstAddButton)});
+
+        firstAddRemoveRule.appendChild(firstAddButton);
+
+        ruleContainer.appendChild(firstAddRemoveRule);
+
+        parent.appendChild(ruleContainer);
+    }
 }
