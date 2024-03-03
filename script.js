@@ -151,7 +151,7 @@ function addStatement(elem) {
 
 function removeStatement(elem) {
     let statementCount = document.body.children.length;
-    if(statementCount > 2) {
+    if(statementCount > 3) {
         let statement = elem.parentNode.parentNode;
 
         statement.remove();
