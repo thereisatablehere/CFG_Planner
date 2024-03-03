@@ -4,7 +4,7 @@
     --ruleHorizontalSpacing: 0.25em;
 }
 
-body, input, button {
+body, input, button, a {
     background-color: #1b2631;
     color: #d1c4e9;
     font-family: "Madimi One", sans-serif;
@@ -55,10 +55,21 @@ button:hover, label:hover {
 #mainControls label {
     padding-left: 0.25em;
     padding-right: 0.25em;
+    display: flex;
+    align-items: center;
 }
 
 #mainControls input {
     display: none;
+}
+
+#downloadLink {
+    visibility: hidden;
+    font-size: 20px;
+    color: #00ACC1;
+}
+#downloadLink:hover {
+    color: #26C6DA;
 }
 
 .container {

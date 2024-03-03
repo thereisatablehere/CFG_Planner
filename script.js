@@ -317,3 +317,11 @@ function createHTMLfromLoadData() {
         insertAfterElem.insertAdjacentElement("afterend", newStatement);
     }
 }
+
+function save() {
+    document.getElementById("downloadLink").style.visibility = "visible";
+}
+
+function downloadFile() {
+    document.getElementById("downloadLink").style.visibility = "hidden";
+}
