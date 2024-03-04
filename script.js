@@ -165,12 +165,12 @@ function toggleButtons() {
     for(let button of buttons) {
         if(button.className != "mainControlButton") {
             if(showButtons) {
-                button.style.visibility = "visible";
-                // button.style.display = "block";
+                // button.style.visibility = "visible";
+                button.style.display = "block";
             }
             else {
-                button.style.visibility = "hidden";
-                // button.style.display = "none";
+                // button.style.visibility = "hidden";
+                button.style.display = "none";
             }
         }
     }
