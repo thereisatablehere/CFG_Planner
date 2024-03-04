@@ -10,6 +10,7 @@
 </head>
 <body>
     <div id="mainControls">
+        <button class="mainControlButton" onclick="toggleChangeColorOnClick(this)">Change Color on Click</button>
         <button class="mainControlButton" onclick="toggleButtons()">Toggle Buttons</button>
         <label for="load">Load</label>
         <input id="load" type="file" onchange="load(this)">
@@ -20,13 +21,13 @@
     <div class="container">
         <div class="statementContainer">
             <!-- left side -->
-            <input type="text" value="somenonterminal">
+            <input type="text" onclick="toggleColorOnClick(this)" value="somenonterminal">
 
             <!-- right side -->
             <div class="rigthSide">
                 <div class="ruleContainer">
                     <p>-></p>
-                    <input type="text" value="somerule">
+                    <input type="text" onclick="toggleColorOnClick(this)" value="somerule">
                 </div>
                 <div class="ruleContainer">
                     <div class="addRemoveRule">
@@ -34,7 +35,7 @@
                         <button onclick="removeRule(this)">-</button>
                     </div>
                     <p>|&nbsp;&nbsp;&nbsp;</p>
-                    <input type="text" value="anotherrule">
+                    <input type="text"  onclick="toggleColorOnClick(this)" value="anotherrule">
                 </div>
                 <!-- <div class="ruleContainer">
                     <div class="firstAddRemoveRule">

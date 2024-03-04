@@ -10,6 +10,7 @@ function addRule(elem) {
     let input = document.createElement("input");
     input.type = "text";
     input.value = ".";
+    input.addEventListener("click", function(){toggleColorOnClick(input);});
     
     let addRemoveRule = document.createElement("div");
     addRemoveRule.className = "addRemoveRule";
@@ -88,6 +89,7 @@ function addStatement(elem) {
     let firstInput = document.createElement("input");
     firstInput.type = "text";
     firstInput.value = ".";
+    firstInput.addEventListener("click", function(){toggleColorOnClick(firstInput);});
 
     statementContainer.appendChild(firstInput);
 
@@ -103,6 +105,7 @@ function addStatement(elem) {
     let input = document.createElement("input");
     input.type = "text";
     input.value = ".";
+    input.addEventListener("click", function(){toggleColorOnClick(input);});
 
     ruleContainerTop.appendChild(arrow);
     ruleContainerTop.appendChild(input);
@@ -218,6 +221,7 @@ function createHTMLfromLoadData() {
         let firstInput = document.createElement("input");
         firstInput.type = "text";
         firstInput.value = loadData.statements[i].name;
+        firstInput.addEventListener("click", function(){toggleColorOnClick(firstInput);});
 
         statementContainer.appendChild(firstInput);
 
@@ -233,6 +237,7 @@ function createHTMLfromLoadData() {
         let input = document.createElement("input");
         input.type = "text";
         input.value = loadData.statements[i].rules[0];
+        input.addEventListener("click", function(){toggleColorOnClick(input);});
 
         ruleContainerTop.appendChild(arrow);
         ruleContainerTop.appendChild(input);
@@ -267,6 +272,7 @@ function createHTMLfromLoadData() {
                 let input = document.createElement("input");
                 input.type = "text";
                 input.value = loadData.statements[i].rules[ruleIndex];
+                input.addEventListener("click", function(){toggleColorOnClick(input);});
                 
                 let addRemoveRule = document.createElement("div");
                 addRemoveRule.className = "addRemoveRule";
@@ -355,4 +361,31 @@ function save() {
 
 function downloadFile() {
     document.getElementById("downloadLink").style.visibility = "hidden";
+}
+
+let changeColorOnClick = false;
+function toggleChangeColorOnClick(button) {
+    changeColorOnClick = !(changeColorOnClick);
+
+    if(changeColorOnClick) {
+        button.innerHTML = "Don't Change Color on Click";
+    }
+    else {
+        button.innerHTML = "Change Color on Click";
+    }
+}
+
+function toggleColorOnClick(input) {
+    if(changeColorOnClick) {
+        let styles = window.getComputedStyle(input);
+        let currentColor = styles.getPropertyValue("color");
+        let formatted = currentColor.replace("rgb(", "").replace(")", "").split(",");
+
+        if(formatted[0] == 209 && formatted[1] == 196 && formatted[2] == 233) {
+            input.style.color = "#FFF9C4";
+        }
+        else {
+            input.style.color = "#d1c4e9";
+        }
+    }
 }
