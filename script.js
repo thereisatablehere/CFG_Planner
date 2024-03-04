@@ -208,7 +208,7 @@ function createHTMLfromLoadData() {
     }
 
     // then add statements
-    for(let i = 0; i < statementCount; i++) {
+    for(let i = statementCount - 1; i >= 0; i--) {
         let newStatement = document.createElement("div");
         newStatement.className = "container";
 
