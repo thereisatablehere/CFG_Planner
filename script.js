@@ -77,7 +77,7 @@ function removeRule(elem) {
     }
 }
 
-function addStatement(elem) {
+function addStatement(elem, above) {
     let statement = elem.parentNode.parentNode;
 
     let newStatement = document.createElement("div");
@@ -135,20 +135,30 @@ function addStatement(elem) {
     let addRemoveStatement = document.createElement("div");
     addRemoveStatement.className = "addRemoveStatement";
 
+    let addAboveButton = document.createElement("button");
+    addAboveButton.innerText = "^+";
+    addAboveButton.addEventListener("click", function(){addStatement(addButton, true)});
+
     let addButton = document.createElement("button");
     addButton.innerText = "+";
-    addButton.addEventListener("click", function(){addStatement(addButton)});
+    addButton.addEventListener("click", function(){addStatement(addButton, false)});
     
     let removeButton = document.createElement("button");
     removeButton.innerText = "-";
     removeButton.addEventListener("click", function(){removeStatement(removeButton)});
 
+    addRemoveStatement.appendChild(addAboveButton);
     addRemoveStatement.appendChild(addButton);
     addRemoveStatement.appendChild(removeButton);
 
     newStatement.appendChild(addRemoveStatement);
 
-    statement.insertAdjacentElement("afterend", newStatement);
+    if(above) {
+        statement.insertAdjacentElement("beforebegin", newStatement);
+    }
+    else {
+        statement.insertAdjacentElement("afterend", newStatement);
+    }
 }
 
 function removeStatement(elem) {
