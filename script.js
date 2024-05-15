@@ -530,7 +530,7 @@ function save() {
 
         let rules = statements[i].children[0].children[1].children;
         
-        let rule = rules[0].children[1].value;
+        let rule = rules[0].children[2].value;
         statement.rules.push(rule);
 
         for(let j = 1; j < rules.length; j++) {
@@ -553,7 +553,7 @@ function save() {
     aRef.href = url;
     aRef.download = "CFG.json";
 
-    aRef.style.visibility = "visible";
+    aRef.style.visibility = "visible"
 }
 
 function downloadFile() {
