@@ -26,6 +26,14 @@
             <!-- right side -->
             <div class="rigthSide">
                 <div class="ruleContainer">
+                    <div class="addRemoveRule" style="margin-top: -1.5em">
+                        <button onclick="addRule(this)">+</button>
+                        <button onclick="removeRule(this)">-</button>
+
+                        <button class="moveRuleUp" onclick="moveRule(this, true)">/\</button>
+                        <button class="moveRuleDown" onclick="moveRule(this, false)">\/</button>
+                    </div>
+
                     <p>-></p>
                     <input type="text" onclick="toggleColorOnClick(this)" value="somerule">
                 </div>
@@ -33,6 +41,9 @@
                     <div class="addRemoveRule">
                         <button onclick="addRule(this)">+</button>
                         <button onclick="removeRule(this)">-</button>
+
+                        <button class="moveRuleUp" onclick="moveRule(this, true)">/\</button>
+                        <button class="moveRuleDown" onclick="moveRule(this, false)">\/</button>
                     </div>
                     <p>|&nbsp;&nbsp;&nbsp;</p>
                     <input type="text"  onclick="toggleColorOnClick(this)" value="anotherrule">
@@ -50,14 +61,14 @@
             <button onclick="addStatement(this, false)">+</button>
             <button onclick="removeStatement(this)">-</button>
             
-            <button onclick="move(this.parentNode.parentNode, true)"
+            <button onclick="moveStatement(this.parentNode.parentNode, true)"
             style="
             margin-left: 0.75em;
             background-color: rgb(100, 110, 150);
             ">
                 /\
             </button>
-            <button onclick="move(this.parentNode.parentNode, false)"
+            <button onclick="moveStatement(this.parentNode.parentNode, false)"
             style="
             background-color: rgb(100, 110, 150);
             ">

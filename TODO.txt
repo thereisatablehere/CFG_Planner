@@ -1,5 +1,6 @@
 -Reorder rules in statement
 -Print mode:
+    >Make text smaller
     >Black on white
     >Remove controls at top
     >Probably open in new tab

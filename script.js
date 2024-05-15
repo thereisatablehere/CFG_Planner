@@ -1,4 +1,267 @@
-function move(elem, up) {
+function addRule(elem) {
+    let container = elem.parentNode.parentNode;
+
+    let ruleContainer = document.createElement("div");
+    ruleContainer.className = "ruleContainer";
+
+    let pipe = document.createElement("p");
+    pipe.innerHTML = "|&nbsp;&nbsp;&nbsp;";
+    
+    let input = document.createElement("input");
+    input.type = "text";
+    input.value = ".";
+    input.addEventListener("click", function(){toggleColorOnClick(input);});
+    
+    let addRemoveRule = document.createElement("div");
+    addRemoveRule.className = "addRemoveRule";
+    
+    let addButton = document.createElement("button");
+    addButton.innerText = "+";
+    addButton.addEventListener("click", function(){addRule(addButton)});
+
+    let removeButton = document.createElement("button");
+    removeButton.innerText = "-";
+    removeButton.addEventListener("click", function(){removeRule(removeButton)});
+
+    let moveRuleUpButton = document.createElement("button");
+    moveRuleUpButton.className = "moveRuleUp";
+    moveRuleUpButton.innerText = "/\\";
+    moveRuleUpButton.addEventListener("click", function(){moveRule(moveRuleUpButton, true)});
+
+    let moveRuleDownButton = document.createElement("button");
+    moveRuleDownButton.className = "moveRuleDown";
+    moveRuleDownButton.innerText = "\\/";
+    moveRuleDownButton.addEventListener("click", function(){moveRule(moveRuleDownButton, false)});
+
+    addRemoveRule.appendChild(addButton);
+    addRemoveRule.appendChild(removeButton);
+    addRemoveRule.appendChild(moveRuleUpButton);
+    addRemoveRule.appendChild(moveRuleDownButton);
+    
+    ruleContainer.appendChild(addRemoveRule);
+    ruleContainer.appendChild(pipe);
+    ruleContainer.appendChild(input);
+
+    container.insertAdjacentElement("afterend", ruleContainer);
+}
+
+function addFirstRule(elem) {
+    let container = elem.parentNode.parentNode;
+
+    addRule(elem);
+
+    container.remove();
+}
+
+function removeRule(elem) {
+    let container = elem.parentNode.parentNode;
+
+    let parent = container.parentNode.parentNode.parentNode;
+    let rulesCount = parent.children[0].children[1].children.length;
+
+    if(rulesCount > 1) {
+        container.remove();
+    }
+
+    // make sure to first rule has an arrow instead of a pipe
+    if(rulesCount == 2) {
+        parent.children[0].children[1].children[0].children[1].innerHTML = "->";
+    }
+}
+
+function moveRule(elem, up) {
+    let parent = elem.parentNode.parentNode.parentNode;
+    let children = parent.children;
+    let toMove = elem.parentNode.parentNode;
+    let index = -1;
+
+    // first find index of toMove in children
+    for(let i = 0; i < children.length; i++) {
+        if(children[i] == toMove) {
+            if(up && (i > 0)) {
+                index = i - 1;
+            }
+            else if(!(up) && (i < children.length - 1)) {
+                index = i + 1;
+            }
+            else {
+                index = i;
+            }
+            
+            break;
+        }
+    }
+
+    
+    let temp = [];
+    
+    // create temporary array that will replace rightSide
+    for(let i = 0; i < children.length; i++) {
+        if(i == index) {
+            if(up) {
+                temp.push(toMove);
+                temp.push(children[i]);
+            }
+            else {
+                temp.push(children[i]);
+                temp.push(toMove);
+            }
+        }
+        else if(children[i] != toMove) {
+            temp.push(children[i]);
+        }
+    }
+
+    console.log(parent);
+    // remove current elements in right side
+    for(let i = 0; i < children.length; i++) {
+        children[i].remove();
+    }
+
+    // add temp into right side
+    for(let i = 0; i < temp.length; i++) {
+        console.log(temp[i].children);
+        // make sure controls for first rule are higher than other rule controls
+        // and make sure the arrow or pipe is correctly
+        if(i == 0) {
+            temp[i].children[0].style.marginTop = "-1.5em";
+            temp[i].children[1].innerHTML = "->";
+        }
+        else {
+            temp[i].children[0].style.marginTop = "0";
+            temp[i].children[1].innerHTML = "|&nbsp;&nbsp;&nbsp;";
+        }
+
+        parent.appendChild(temp[i]);
+    }
+}
+
+function addStatement(elem, above) {
+    let statement = elem.parentNode.parentNode;
+
+    let newStatement = document.createElement("div");
+    newStatement.className = "container";
+
+    let statementContainer = document.createElement("div");
+    statementContainer.className = "statementContainer";
+
+    let firstInput = document.createElement("input");
+    firstInput.type = "text";
+    firstInput.value = ".";
+    firstInput.addEventListener("click", function(){toggleColorOnClick(firstInput);});
+
+    statementContainer.appendChild(firstInput);
+
+    let rightSide = document.createElement("div");
+    rightSide.className = "rightSide";
+
+    let ruleContainerTop = document.createElement("div");
+    ruleContainerTop.className = "ruleContainer";
+
+    let arrow = document.createElement("p");
+    arrow.innerHTML = "->";
+
+    let input = document.createElement("input");
+    input.type = "text";
+    input.value = ".";
+    input.addEventListener("click", function(){toggleColorOnClick(input);});
+
+    ruleContainerTop.appendChild(arrow);
+    ruleContainerTop.appendChild(input);
+
+    rightSide.appendChild(ruleContainerTop);
+
+    let ruleContainerBottom = document.createElement("div");
+    ruleContainerBottom.className = "ruleContainer";
+
+    let ruleControls = document.createElement("div");
+    ruleControls.className = "addRemoveRule";
+    ruleControls.style.marginTop = "-3em";
+
+    let addRuleButton = document.createElement("button");
+    addRuleButton.innerText = "+";
+    addRuleButton.addEventListener("click", function(){addRule(addRuleButton)});
+
+    let removeRuleButton = document.createElement("button");
+    removeRuleButton.innerText = "-";
+    removeRuleButton.addEventListener("click", function(){removeRule(removeRuleButton)});
+
+    let moveRuleUpButton = document.createElement("button");
+    moveRuleUpButton.className = "moveRuleUp";
+    moveRuleUpButton.innerText = "/\\";
+    moveRuleUpButton.addEventListener("click", function(){moveRule(moveRuleUpButton, true)});
+
+    let moveRuleDownButton = document.createElement("button");
+    moveRuleDownButton.className = "moveRuleDown";
+    moveRuleDownButton.innerText = "\\/";
+    moveRuleDownButton.addEventListener("click", function(){moveRule(moveRuleDownButton, false)});
+
+    ruleControls.appendChild(addRuleButton);
+    ruleControls.appendChild(removeRuleButton);
+    ruleControls.appendChild(moveRuleUpButton);
+    ruleControls.appendChild(moveRuleDownButton);
+
+    ruleContainerBottom.appendChild(ruleControls);
+
+    rightSide.appendChild(ruleContainerBottom);
+
+    statementContainer.appendChild(rightSide);
+
+    newStatement.appendChild(statementContainer);
+    
+    let addRemoveStatement = document.createElement("div");
+    addRemoveStatement.className = "addRemoveStatement";
+
+    let addAboveButton = document.createElement("button");
+    addAboveButton.innerText = "^+";
+    addAboveButton.addEventListener("click", function(){addStatement(addButton, true)});
+
+    let addButton = document.createElement("button");
+    addButton.innerText = "+";
+    addButton.addEventListener("click", function(){addStatement(addButton, false)});
+    
+    let removeButton = document.createElement("button");
+    removeButton.innerText = "-";
+    removeButton.addEventListener("click", function(){removeStatement(removeButton)});
+
+    addRemoveStatement.appendChild(addAboveButton);
+    addRemoveStatement.appendChild(addButton);
+    addRemoveStatement.appendChild(removeButton);
+
+    let moveUpButton = document.createElement("button");
+    moveUpButton.innerText = "/\\";
+    moveUpButton.style.backgroundColor = "rgb(100, 110, 140)";
+    moveUpButton.style.marginLeft = "0.75em";
+    moveUpButton.addEventListener("click", function(){moveStatement(moveUpButton.parentNode.parentNode, true)});
+    
+    let moveDownButton = document.createElement("button");
+    moveDownButton.innerText = "\\/";
+    moveDownButton.style.backgroundColor = "rgb(100, 110, 140)";
+    moveDownButton.addEventListener("click", function(){moveStatement(moveDownButton.parentNode.parentNode, false)});
+
+    addRemoveStatement.appendChild(moveUpButton);
+    addRemoveStatement.appendChild(moveDownButton);
+
+    newStatement.appendChild(addRemoveStatement);
+
+    if(above) {
+        statement.insertAdjacentElement("beforebegin", newStatement);
+    }
+    else {
+        statement.insertAdjacentElement("afterend", newStatement);
+    }
+}
+
+function removeStatement(elem) {
+    let statementCount = document.body.children.length;
+    if(statementCount > 3) {
+        let statement = elem.parentNode.parentNode;
+
+        statement.remove();
+    }
+}
+
+function moveStatement(elem, up) {
     let temp = [];
     
     // first get index of element to move
@@ -50,167 +313,6 @@ function move(elem, up) {
     // add temp into body
     for(let i = 0; i < temp.length; i++) {
         document.body.appendChild(temp[i]);
-    }
-}
-
-function addRule(elem) {
-    let container = elem.parentNode.parentNode;
-
-    let ruleContainer = document.createElement("div");
-    ruleContainer.className = "ruleContainer";
-
-    let pipe = document.createElement("p");
-    pipe.innerHTML = "|&nbsp;&nbsp;&nbsp;";
-    
-    let input = document.createElement("input");
-    input.type = "text";
-    input.value = ".";
-    input.addEventListener("click", function(){toggleColorOnClick(input);});
-    
-    let addRemoveRule = document.createElement("div");
-    addRemoveRule.className = "addRemoveRule";
-    
-    let addButton = document.createElement("button");
-    addButton.innerText = "+";
-    addButton.addEventListener("click", function(){addRule(addButton)});
-    
-    let removeButton = document.createElement("button");
-    removeButton.innerText = "-";
-    removeButton.addEventListener("click", function(){removeRule(removeButton)});
-
-    addRemoveRule.appendChild(addButton);
-    addRemoveRule.appendChild(removeButton);
-    
-    ruleContainer.appendChild(addRemoveRule);
-    ruleContainer.appendChild(pipe);
-    ruleContainer.appendChild(input);
-
-    container.insertAdjacentElement("afterend", ruleContainer);
-}
-
-function addFirstRule(elem) {
-    let container = elem.parentNode.parentNode;
-
-    addRule(elem);
-
-    container.remove();
-}
-
-function removeRule(elem) {
-    let container = elem.parentNode.parentNode;
-
-    let parent = container.parentNode.parentNode.parentNode;
-    let rulesCount = parent.children[0].children[1].children.length;
-
-    if(rulesCount > 2) {
-        container.remove();
-    }
-}
-
-function addStatement(elem, above) {
-    let statement = elem.parentNode.parentNode;
-
-    let newStatement = document.createElement("div");
-    newStatement.className = "container";
-
-    let statementContainer = document.createElement("div");
-    statementContainer.className = "statementContainer";
-
-    let firstInput = document.createElement("input");
-    firstInput.type = "text";
-    firstInput.value = ".";
-    firstInput.addEventListener("click", function(){toggleColorOnClick(firstInput);});
-
-    statementContainer.appendChild(firstInput);
-
-    let rightSide = document.createElement("div");
-    rightSide.className = "rightSide";
-
-    let ruleContainerTop = document.createElement("div");
-    ruleContainerTop.className = "ruleContainer";
-
-    let arrow = document.createElement("p");
-    arrow.innerHTML = "->";
-
-    let input = document.createElement("input");
-    input.type = "text";
-    input.value = ".";
-    input.addEventListener("click", function(){toggleColorOnClick(input);});
-
-    ruleContainerTop.appendChild(arrow);
-    ruleContainerTop.appendChild(input);
-
-    rightSide.appendChild(ruleContainerTop);
-
-    let ruleContainerBottom = document.createElement("div");
-    ruleContainerBottom.className = "ruleContainer";
-
-    let firstAddRemoveRule = document.createElement("div");
-    firstAddRemoveRule.className = "firstAddRemoveRule";
-
-    let firstAddButton = document.createElement("button");
-    firstAddButton.innerText = "+";
-    firstAddButton.addEventListener("click", function(){addFirstRule(firstAddButton)});
-
-    firstAddRemoveRule.appendChild(firstAddButton);
-
-    ruleContainerBottom.appendChild(firstAddRemoveRule);
-
-    rightSide.appendChild(ruleContainerBottom);
-
-    statementContainer.appendChild(rightSide);
-
-    newStatement.appendChild(statementContainer);
-    
-    let addRemoveStatement = document.createElement("div");
-    addRemoveStatement.className = "addRemoveStatement";
-
-    let addAboveButton = document.createElement("button");
-    addAboveButton.innerText = "^+";
-    addAboveButton.addEventListener("click", function(){addStatement(addButton, true)});
-
-    let addButton = document.createElement("button");
-    addButton.innerText = "+";
-    addButton.addEventListener("click", function(){addStatement(addButton, false)});
-    
-    let removeButton = document.createElement("button");
-    removeButton.innerText = "-";
-    removeButton.addEventListener("click", function(){removeStatement(removeButton)});
-
-    addRemoveStatement.appendChild(addAboveButton);
-    addRemoveStatement.appendChild(addButton);
-    addRemoveStatement.appendChild(removeButton);
-
-    let moveUpButton = document.createElement("button");
-    moveUpButton.innerText = "/\\";
-    moveUpButton.style.backgroundColor = "rgb(100, 110, 140)";
-    moveUpButton.style.marginLeft = "0.75em";
-    moveUpButton.addEventListener("click", function(){move(moveUpButton.parentNode.parentNode, true)});
-    
-    let moveDownButton = document.createElement("button");
-    moveDownButton.innerText = "\\/";
-    moveDownButton.style.backgroundColor = "rgb(100, 110, 140)";
-    moveDownButton.addEventListener("click", function(){move(moveDownButton.parentNode.parentNode, false)});
-
-    addRemoveStatement.appendChild(moveUpButton);
-    addRemoveStatement.appendChild(moveDownButton);
-
-    newStatement.appendChild(addRemoveStatement);
-
-    if(above) {
-        statement.insertAdjacentElement("beforebegin", newStatement);
-    }
-    else {
-        statement.insertAdjacentElement("afterend", newStatement);
-    }
-}
-
-function removeStatement(elem) {
-    let statementCount = document.body.children.length;
-    if(statementCount > 3) {
-        let statement = elem.parentNode.parentNode;
-
-        statement.remove();
     }
 }
 
@@ -285,6 +387,35 @@ function createHTMLfromLoadData() {
         let ruleContainerTop = document.createElement("div");
         ruleContainerTop.className = "ruleContainer";
 
+        let addRemoveRule = document.createElement("div");
+        addRemoveRule.className = "addRemoveRule";
+        addRemoveRule.style.marginTop = "-1.5em";
+
+        let addRuleButton = document.createElement("button");
+        addRuleButton.innerText = "+";
+        addRuleButton.addEventListener("click", function(){addRule(addRuleButton)});
+
+        let removeRuleButton = document.createElement("button");
+        removeRuleButton.innerText = "-";
+        removeRuleButton.addEventListener("click", function(){removeRule(removeRuleButton)});
+
+        let moveRuleUpButton = document.createElement("button");
+        moveRuleUpButton.className = "moveRuleUp";
+        moveRuleUpButton.innerText = "/\\";
+        moveRuleUpButton.addEventListener("click", function(){moveRule(moveRuleUpButton, true)});
+
+        let moveRuleDownButton = document.createElement("button");
+        moveRuleDownButton.className = "moveRuleDown";
+        moveRuleDownButton.innerText = "\\/";
+        moveRuleDownButton.addEventListener("click", function(){moveRule(moveRuleDownButton, false)});
+
+        addRemoveRule.appendChild(addRuleButton);
+        addRemoveRule.appendChild(removeRuleButton);
+        addRemoveRule.appendChild(moveRuleUpButton);
+        addRemoveRule.appendChild(moveRuleDownButton);
+
+        ruleContainerTop.appendChild(addRemoveRule);
+
         let arrow = document.createElement("p");
         arrow.innerHTML = "->";
 
@@ -298,56 +429,49 @@ function createHTMLfromLoadData() {
 
         rightSide.appendChild(ruleContainerTop);
 
-        if(loadData.statements[i].rules.length == 1) {
-            let ruleContainerBottom = document.createElement("div");
-            ruleContainerBottom.className = "ruleContainer";
+        for(let ruleIndex = 1; ruleIndex < loadData.statements[i].rules.length; ruleIndex++) {
+            let ruleContainer = document.createElement("div");
+            ruleContainer.className = "ruleContainer";
 
-            let firstAddRemoveRule = document.createElement("div");
-            firstAddRemoveRule.className = "firstAddRemoveRule";
+            let pipe = document.createElement("p");
+            pipe.innerHTML = "|&nbsp;&nbsp;&nbsp;";
+            
+            let input = document.createElement("input");
+            input.type = "text";
+            input.value = loadData.statements[i].rules[ruleIndex];
+            input.addEventListener("click", function(){toggleColorOnClick(input);});
+            
+            let addRemoveRule = document.createElement("div");
+            addRemoveRule.className = "addRemoveRule";
+            
+            let addButton = document.createElement("button");
+            addButton.innerText = "+";
+            addButton.addEventListener("click", function(){addRule(addButton)});
+            
+            let removeButton = document.createElement("button");
+            removeButton.innerText = "-";
+            removeButton.addEventListener("click", function(){removeRule(removeButton)});
 
-            let firstAddButton = document.createElement("button");
-            firstAddButton.innerText = "+";
-            firstAddButton.addEventListener("click", function(){addFirstRule(firstAddButton)});
+            let moveRuleUpButton = document.createElement("button");
+            moveRuleUpButton.className = "moveRuleUp";
+            moveRuleUpButton.innerText = "/\\";
+            moveRuleUpButton.addEventListener("click", function(){moveRule(moveRuleUpButton, true)});
 
-            firstAddRemoveRule.appendChild(firstAddButton);
+            let moveRuleDownButton = document.createElement("button");
+            moveRuleDownButton.className = "moveRuleDown";
+            moveRuleDownButton.innerText = "\\/";
+            moveRuleDownButton.addEventListener("click", function(){moveRule(moveRuleDownButton, false)});
 
-            ruleContainerBottom.appendChild(firstAddRemoveRule);
+            addRemoveRule.appendChild(addButton);
+            addRemoveRule.appendChild(removeButton);
+            addRemoveRule.appendChild(moveRuleUpButton);
+            addRemoveRule.appendChild(moveRuleDownButton);
+            
+            ruleContainer.appendChild(addRemoveRule);
+            ruleContainer.appendChild(pipe);
+            ruleContainer.appendChild(input);
 
-            rightSide.appendChild(ruleContainerBottom);
-        }
-        else {
-            for(let ruleIndex = 1; ruleIndex < loadData.statements[i].rules.length; ruleIndex++) {
-                let ruleContainer = document.createElement("div");
-                ruleContainer.className = "ruleContainer";
-
-                let pipe = document.createElement("p");
-                pipe.innerHTML = "|&nbsp;&nbsp;&nbsp;";
-                
-                let input = document.createElement("input");
-                input.type = "text";
-                input.value = loadData.statements[i].rules[ruleIndex];
-                input.addEventListener("click", function(){toggleColorOnClick(input);});
-                
-                let addRemoveRule = document.createElement("div");
-                addRemoveRule.className = "addRemoveRule";
-                
-                let addButton = document.createElement("button");
-                addButton.innerText = "+";
-                addButton.addEventListener("click", function(){addRule(addButton)});
-                
-                let removeButton = document.createElement("button");
-                removeButton.innerText = "-";
-                removeButton.addEventListener("click", function(){removeRule(removeButton)});
-
-                addRemoveRule.appendChild(addButton);
-                addRemoveRule.appendChild(removeButton);
-                
-                ruleContainer.appendChild(addRemoveRule);
-                ruleContainer.appendChild(pipe);
-                ruleContainer.appendChild(input);
-
-                rightSide.appendChild(ruleContainer);
-            }
+            rightSide.appendChild(ruleContainer);
         }
 
         statementContainer.appendChild(rightSide);
@@ -377,12 +501,12 @@ function createHTMLfromLoadData() {
         moveUpButton.innerText = "/\\";
         moveUpButton.style.backgroundColor = "rgb(100, 110, 140)";
         moveUpButton.style.marginLeft = "0.75em";
-        moveUpButton.addEventListener("click", function(){move(moveUpButton.parentNode.parentNode, true)});
+        moveUpButton.addEventListener("click", function(){moveStatement(moveUpButton.parentNode.parentNode, true)});
         
         let moveDownButton = document.createElement("button");
         moveDownButton.innerText = "\\/";
         moveDownButton.style.backgroundColor = "rgb(100, 110, 140)";
-        moveDownButton.addEventListener("click", function(){move(moveDownButton.parentNode.parentNode, false)});
+        moveDownButton.addEventListener("click", function(){moveStatement(moveDownButton.parentNode.parentNode, false)});
 
         addRemoveStatement.appendChild(moveUpButton);
         addRemoveStatement.appendChild(moveDownButton);

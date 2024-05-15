@@ -42,7 +42,7 @@ button:hover, label:hover {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
 }
 
 #mainControls button, #mainControls label {
@@ -78,6 +78,7 @@ button:hover, label:hover {
     flex-direction: column;
     width: fit-content;
     margin: 0;
+    margin-bottom: 1em;
 }
 
 .statementContainer {
@@ -116,7 +117,19 @@ button:hover, label:hover {
     flex-direction: row;
     justify-content: center;
     margin-top: 0.15em;
-    margin-left: -2.5em;
+    margin-left: -5.5em;
+}
+
+.moveRuleUp, .moveRuleDown {
+    background-color: rgb(100, 110, 150);
+    color: rgb(210, 210, 210);
+}
+.moveRuleUp {
+    margin-left: 0.75em;
+    margin-right: -0.75em;
+}
+.moveRuleDown {
+    margin-left: 1.25em;
 }
 
 .firstAddRemoveRule {
