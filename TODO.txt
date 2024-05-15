@@ -1,0 +1,5 @@
+-Reorder rules in statement
+-Print mode:
+    >Black on white
+    >Remove controls at top
+    >Probably open in new tab
