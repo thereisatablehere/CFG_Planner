@@ -5,8 +5,9 @@ This website aims to be a simple context-free grammar text editor. It allows a m
 - To edit a rule, click the text that you want to edit.
 - To add/ remove a condition of a statement, click one of the purple buttons buttons to the left of each line of a statement.\
 *Note that adding a condition of a statement will do so right below where the button pressed is to add that condition.*
-- To add/ remove a statement, click one of the blue buttons beneath each statement\
-*Note that adding a statement will do so right below where the button pressed is to add that statement.*
+- To reorder a rule in a stement, click one of the grey buttons to the right of the add and remove rule buttons. Click the grey "/\\" to move the rule up, or the grey "\\/" to move the rule down.
+- To add/ remove a statement, click one of the blue buttons beneath each statement. The "^+" button adds a statement above the current statement.
+- To reorder a statement, click one of the grey buttons to the right of the add and remove statement buttons. Click the grey "/\\" button to move the statement up, or the grey "\\/" to move the statement down.
 - The "Change Color on Click" button, when clicked, allows you to toggle the color of any text between the default purple and yellow. And after the button is pressed, which should now be "Don't Change Color on Click", clicking text will not toggle the color anymore.
 - The "Toggle Buttons" button will toggle between having the add/ remove buttons showing, and hidden and moved out of the way: statements will be moved up to fill the empty space of where the buttons used to be.
 - You can save/ load CFGs from the "Load" and "Save" buttons, which allows you to save/ load a CFG from/ to your device.\

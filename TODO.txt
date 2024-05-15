@@ -1,4 +1,3 @@
--Reorder rules in statement
 -Print mode:
     >Make text smaller
     >Black on white
