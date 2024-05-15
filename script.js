@@ -1,3 +1,58 @@
+function move(elem, up) {
+    let temp = [];
+    
+    // first get index of element to move
+
+    let children = document.getElementsByClassName("container");
+    let index = -1;
+
+    for(let i = 0; i < children.length; i++) {
+        if(children[i] == elem) {
+            if(up && (i > 0)) {
+                index = i - 1;
+            }
+            else if(!(up) && (i < children.length - 1)) {
+                index = i + 1;
+            }
+            else {
+                index = i;
+            }
+            
+            break;
+        }
+    }
+
+
+    // reorder in temporary array that will get set to body 
+    // after clearing
+    for(let i = 0; i < children.length; i++) {
+        if(i == index) {
+            if(!(up)) {
+                temp.push(children[i]);
+                temp.push(elem);
+            }
+            else {
+                temp.push(elem);
+                temp.push(children[i]);
+            }
+        }
+        else if(children[i] != elem) {
+            temp.push(children[i]);
+        }
+    }
+
+    
+    // clear body
+    for(let i = 0; i < children.length; i++) {
+        children[i].remove();
+    }
+
+    // add temp into body
+    for(let i = 0; i < temp.length; i++) {
+        document.body.appendChild(temp[i]);
+    }
+}
+
 function addRule(elem) {
     let container = elem.parentNode.parentNode;
 
@@ -44,7 +99,7 @@ function addFirstRule(elem) {
 function removeRule(elem) {
     let container = elem.parentNode.parentNode;
 
-    let parent = container.parentNode;
+    let parent = container.parentNode.parentNode;
     let parentChilds = parent.children;
     let parentChildsLength = parentChilds.length;
 
@@ -150,6 +205,20 @@ function addStatement(elem, above) {
     addRemoveStatement.appendChild(addAboveButton);
     addRemoveStatement.appendChild(addButton);
     addRemoveStatement.appendChild(removeButton);
+
+    let moveUpButton = document.createElement("button");
+    moveUpButton.innerText = "/\\";
+    moveUpButton.style.backgroundColor = "rgb(100, 110, 140)";
+    moveUpButton.style.marginLeft = "0.75em";
+    moveUpButton.addEventListener("click", function(){move(moveUpButton.parentNode.parentNode, true)});
+    
+    let moveDownButton = document.createElement("button");
+    moveDownButton.innerText = "\\/";
+    moveDownButton.style.backgroundColor = "rgb(100, 110, 140)";
+    moveDownButton.addEventListener("click", function(){move(moveDownButton.parentNode.parentNode, false)});
+
+    addRemoveStatement.appendChild(moveUpButton);
+    addRemoveStatement.appendChild(moveDownButton);
 
     newStatement.appendChild(addRemoveStatement);
 
@@ -328,6 +397,20 @@ function createHTMLfromLoadData() {
         addRemoveStatement.appendChild(addAboveButton);
         addRemoveStatement.appendChild(addButton);
         addRemoveStatement.appendChild(removeButton);
+
+        let moveUpButton = document.createElement("button");
+        moveUpButton.innerText = "/\\";
+        moveUpButton.style.backgroundColor = "rgb(100, 110, 140)";
+        moveUpButton.style.marginLeft = "0.75em";
+        moveUpButton.addEventListener("click", function(){move(moveUpButton.parentNode.parentNode, true)});
+        
+        let moveDownButton = document.createElement("button");
+        moveDownButton.innerText = "\\/";
+        moveDownButton.style.backgroundColor = "rgb(100, 110, 140)";
+        moveDownButton.addEventListener("click", function(){move(moveDownButton.parentNode.parentNode, false)});
+
+        addRemoveStatement.appendChild(moveUpButton);
+        addRemoveStatement.appendChild(moveDownButton);
 
         newStatement.appendChild(addRemoveStatement);
 

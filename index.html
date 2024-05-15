@@ -49,6 +49,20 @@
             <button onclick="addStatement(this, true)">^+</button>
             <button onclick="addStatement(this, false)">+</button>
             <button onclick="removeStatement(this)">-</button>
+            
+            <button onclick="move(this.parentNode.parentNode, true)"
+            style="
+            margin-left: 0.75em;
+            background-color: rgb(100, 110, 150);
+            ">
+                /\
+            </button>
+            <button onclick="move(this.parentNode.parentNode, false)"
+            style="
+            background-color: rgb(100, 110, 150);
+            ">
+                \/
+            </button>
         </div>
     </div>
 
