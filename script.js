@@ -313,6 +313,10 @@ function createHTMLfromLoadData() {
         let addRemoveStatement = document.createElement("div");
         addRemoveStatement.className = "addRemoveStatement";
 
+        let addAboveButton = document.createElement("button");
+        addAboveButton.innerText = "^+";
+        addAboveButton.addEventListener("click", function(){addStatement(addButton, true)});
+
         let addButton = document.createElement("button");
         addButton.innerText = "+";
         addButton.addEventListener("click", function(){addStatement(addButton)});
@@ -321,6 +325,7 @@ function createHTMLfromLoadData() {
         removeButton.innerText = "-";
         removeButton.addEventListener("click", function(){removeStatement(removeButton)});
 
+        addRemoveStatement.appendChild(addAboveButton);
         addRemoveStatement.appendChild(addButton);
         addRemoveStatement.appendChild(removeButton);
 
