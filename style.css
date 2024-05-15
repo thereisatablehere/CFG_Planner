@@ -14,7 +14,7 @@ body, input, button, a {
 input {
     border: none;
     outline: none;
-    width: 12em;
+    width: 55vw;
     height: 1em;
     text-align: end;
     margin: 0;
@@ -76,6 +76,8 @@ button:hover, label:hover {
 .container {
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    margin: 0;
 }
 
 .statementContainer {
@@ -88,6 +90,7 @@ button:hover, label:hover {
 
 .statementContainer input:first-child {
     text-align: end;
+    width: 12em;
 }
 
 .statementContainer .rightSide {
@@ -124,6 +127,7 @@ button:hover, label:hover {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-left: -27vw;
     margin-top: 0.3em;
 }
 
